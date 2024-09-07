@@ -1,0 +1,69 @@
+---
+title: "Summary of 'On beta regression residuals'"
+subtitle: "Summary of 'On beta regression residuals'"
+author: "Travis Keep (Advisor: Dr. Seals)"
+date: '`r Sys.Date()`'
+format:
+  html:
+    code-fold: true
+course: Capstone Projects in Data Science
+bibliography: references.bib # file contains bibtex for references
+#always_allow_html: true # this allows to get PDF with HTML features
+self-contained: true
+execute: 
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Espinheira, P. L., Ferrari, S. L. P., & Cribari-Neto, F. (2008). On beta regression residuals. Journal of Applied Statistics, 35(4), 407–419. https://doi.org/10.1080/02664760701834931
+
+The purpose of this paper is to introduce two new residuals for estimating beta regressions. 
+$$
+E(y)=\mu \quad \textrm{and} \quad V(y) = \frac{\mu(1-\mu)}{1 + \phi}
+$$
+
+Standard ordinary residual is:
+
+$$
+\frac{y_t – \mu_t}{\sqrt{\frac{\mu(1 - \mu)}{1 + \phi}}}
+$$
+
+The weighted residual:
+
+$$
+\frac{y_t - \mu_t}{\sqrt{\phi v_t}}
+$$
+
+Where 
+
+$$
+v_t = \psi'(\mu_t \phi) + \psi’((1-\mu_t)\phi)
+$$
+Where $\psi$ is the DiGamma function.
+
+The weighted residual 2:
+
+$$
+\frac{y_t – \mu_t}{\sqrt{v_t(1 - h_{tt})}}
+$$
+
+Where $h_{tt}$ is the $t^{th}$ diagonal of H and
+
+$$
+H = W^{1/2} X (X^t WX)^{-1}
+$$
+I don’t understand this. If W is n x n and X is n x k. Then X’WX is k x k.  X (X’WX)^-1 would be n x k also. And H would be n x k. But H is supposed to be a square matrix.
+
+$$
+W = diag(w_1, w_2, \dots, w_n)
+$$
+
+$$
+w_t = \frac{\phi v_t}{g’(\mu_t)^2}
+$$
+
+
+The residual that accounts for “observation leverages” is the best one.

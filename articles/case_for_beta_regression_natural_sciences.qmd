@@ -1,0 +1,27 @@
+---
+title: "Summary of 'A Case for Beta Regression in Natural Sciences'"
+author: "Travis Keep (Advisor: Dr. Seals)"
+date: '`r Sys.Date()`'
+format:
+  html:
+    code-fold: true
+course: Capstone Projects in Data Science
+bibliography: references.bib # file contains bibtex for references
+#always_allow_html: true # this allows to get PDF with HTML features
+self-contained: true
+execute: 
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Geissinger, Emilie A., Celyn L. L. Khoo, Isabella C. Richmond, Sally J. M. Faulkner, and David C. Schneider. 2022. "A Case for Beta Regression in the Natural Sciences." Ecosphere 13(2): e3940. https://doi.org/10.1002/ecs2.3940
+
+This paper explores how often beta regression is used in publications between 2004 and 2020 that use "proportion data" or "percent data" and determines how well beta regression performs on doubly bounded data.
+
+On two data sets they first did conventional linear regression using an arcsine square root transformation. To measuring goodness of fit they used (1) residual versus fit plots, (2) residual histograms, (3) quantile-quantile plots to evaluate normal error assumptions (4) Cook’s distance for outliers.  Then they did beta regression and evaluated goodness of fit using (1) deviance residuals vs. indices of observations to assess specification of the logit link (2) deviance residuals vs. linear predictor for homogeneity, (3) half-normal plot of deviance residuals to assess normality, and (4) Cook’s distance to determine outliers.
+
+One advantage of beta regression is that it allows fitting a model to phi as well as mu which can mean a better fit. One disadvantage to beta regression is that while it includes values between 0 and 1, it excludes 0 and 1. However, many real world response variables could include 0 and 1.  
+

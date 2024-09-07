@@ -1,0 +1,65 @@
+---
+title: "Summary of 'Beta Regression For Modelling Rates And Proportions'"
+subtitle: "Summary of 'Beta Regression For Modelling Rates And Proportions'"
+author: "Travis Keep (Advisor: Dr. Seals)"
+date: '`r Sys.Date()`'
+format:
+  html:
+    code-fold: true
+course: Capstone Projects in Data Science
+bibliography: references.bib # file contains bibtex for references
+#always_allow_html: true # this allows to get PDF with HTML features
+self-contained: true
+execute: 
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+https://www.ime.usp.br/~sferrari/beta.pdf
+
+(I’d like to learn how to get the real citation for this)
+
+ In Beta distribution, there are two tuning parameters a and b. Mean and variance are the following
+ 
+$$
+\mu = \frac{a}{a+b} \quad \sigma^2 = \frac{ab}{(a+b)^2(a+b+1)}
+$$
+
+It is useful to rewrite beta distribution in terms of $\mu$ and $\phi$ where $\mu$ is the mean and $\phi$ is the precision. The higher the $\phi$, the less the variance and the closer random samples are to the mean.
+
+$$
+\phi = a + b \quad \mu = \frac{a}{a + b}
+$$
+
+So $\mu$ is just the mean; and
+
+$$
+\sigma^2 = \frac{\mu(1 - \mu)}{1 + \phi}
+$$
+
+
+
+-	In beta regression the dependent variable is between 0 and 1.
+-	Scaling can be used to model a dependent variable between a and b
+-	The logit function is used to transform the dependent variable between 0 and 1 to a value on the real number line. 
+-	If g is the logit, we model $g(y) = \beta_0 + \beta_1 x_1 + \dots + \beta_k x_k$
+-	We estimate $\beta_0 \dots \beta_k \quad \textrm{and} \quad \phi$ by maximizing the log likelihood function.
+
+In beta regression, if $x_1$ increases by 1 then y changes to $y_1$ so that
+
+$$
+e^{\beta_1} = \frac{y_1 / (1 – y_1)}{y / (1 - y)}
+$$
+if $x_1$ increases by 1, the odds ratio increases by a factor of $e^{\beta_1}$.  
+
+The solution to the log likelihood minimization is not in closed form. Have to use newton’s method to solve.
+
+Diagnositcs:
+
+$$
+r_t = \frac{y_t – \mu_t}{\sqrt{var(y_t)}}
+$$
+ should have no detectable pattern

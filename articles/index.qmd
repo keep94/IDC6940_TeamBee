@@ -1,0 +1,24 @@
+---
+title: "Articles"
+subtitle: "Articles"
+author: "Travis Keep (Advisor: Dr. Seals)"
+date: '`r Sys.Date()`'
+format:
+  html:
+    code-fold: true
+course: Capstone Projects in Data Science
+bibliography: references.bib # file contains bibtex for references
+#always_allow_html: true # this allows to get PDF with HTML features
+self-contained: true
+execute: 
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+- [A Case for Beta Regression in the Natural Sciences](case_for_beta_regression_natural_sciences.html){target="_blank"}
+- [On beta regression residuals](beta_regression_residuals.html){target="_blank"}
+- [Beta Regression For Modelling Rates And Proportions](beta_regression.html){target="_blank}
+
