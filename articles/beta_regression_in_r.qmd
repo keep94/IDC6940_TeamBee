@@ -1,0 +1,32 @@
+---
+title: "Summary of 'Extended Beta Regression in R'"
+author: "Travis Keep (Advisor: Dr. Seals)"
+date: "8 September 2024"
+format:
+  html:
+    code-fold: true
+course: Capstone Projects in Data Science
+bibliography: references.bib # file contains bibtex for references
+#always_allow_html: true # this allows to get PDF with HTML features
+self-contained: true
+execute: 
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Grün, Bettina; Kosmidis, Ioannis; Zeileis, Achim (2012). "Extended Beta Regression in R: Shaken, Stirred, Mixed, and Partitioned" (PDF). cran.r-project.org.
+
+The introduction of this article talks about Beta regression. It first talks about the Beta Distribution and the two parameters that control it,$\mu$ and $\phi$.  The mean is $\mu$; the variance is $\frac{\mu(1 – \mu)}{1 + \phi}$. The introduction then talks about the betareg R package and how it features a two part model: one for $\mu$ and one for $\phi$. Betareg uses the optim() function internally to estimate $\mu$ and $\phi$.
+
+Note: Other articles I have read seem to imply that $logit(\mu)$ is fitted with linear regression and that $\phi$ is constant for the whole model. So I don't understand this R syntax where you supply regressors for both $\mu$ and $\phi$.
+
+Part II talks about Bias correction and reduction in Beta Regression.
+
+Part III talks about beta regression trees
+
+Part IV talks about finite mixtures of beta regressions
+
+Part V gives an illustrative application.

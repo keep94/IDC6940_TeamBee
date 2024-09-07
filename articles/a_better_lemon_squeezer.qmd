@@ -1,0 +1,39 @@
+---
+title: "Summary of 'A better lemon-squeezer? Maximum likelihood regression with beta-distribuited dependent variables'"
+author: "Travis Keep (Advisor: Dr. Seals)"
+date: "8 September 2024"
+format:
+  html:
+    code-fold: true
+course: Capstone Projects in Data Science
+bibliography: references.bib # file contains bibtex for references
+#always_allow_html: true # this allows to get PDF with HTML features
+self-contained: true
+execute: 
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+M. Smithson and J. Verkuilen, A better lemon-squeezer? Maximum likelihood regression with beta-distribuited
+dependent variables Psycholog. Meth. 11 (2006), pp. 54–71.
+
+
+Introduction starts out with reading test scores, N=44 based on IQ and whether or not the child is dyslexic. The scores are converted to (0, 1) using linear transformation. Using conventional linear regression with a logit transformation, shows that IQ alone does not affect reading score, which is not actually the case.
+
+The article introduces beta distribution and discuses the transformation of the shape parameters into $\mu$ and $\phi$. 
+
+The article talks fitting linear models to $logit(\mu)$ and $ln(\phi)$
+
+$$
+logit(\mu_i) = x_i\beta
+$$
+$$
+ln(\phi_i) = -w_i\delta
+$$
+
+W and X are different shape vectors from the data where the first column of each are all 1's. 
+
+So this answers my previous question. Depending on the model chosen, $\phi$ can be constant or it can vary depending on regressors.

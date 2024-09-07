@@ -1,8 +1,7 @@
 ---
 title: "Summary of 'On beta regression residuals'"
-subtitle: "Summary of 'On beta regression residuals'"
 author: "Travis Keep (Advisor: Dr. Seals)"
-date: '`r Sys.Date()`'
+date: "8 September 2024"
 format:
   html:
     code-fold: true

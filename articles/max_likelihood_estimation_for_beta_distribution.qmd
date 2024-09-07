@@ -1,0 +1,57 @@
+---
+title: "Summary of 'Nearly Unbiased Maximum Likelihood Estimation for the Beta Distribution'"
+author: "Travis Keep (Advisor: Dr. Seals)"
+date: "8 September 2024"
+format:
+  html:
+    code-fold: true
+course: Capstone Projects in Data Science
+bibliography: references.bib # file contains bibtex for references
+#always_allow_html: true # this allows to get PDF with HTML features
+self-contained: true
+execute: 
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+Francisco Cribari-Neto & Klaus L. P. Vasconcellos (2002) Nearly Unbiased Maximum Likelihood Estimation for the Beta Distribution, Journal of Statistical Computation and Simulation, 72:2, 107-118, DOI: 10.1080/00949650212144
+
+
+The introduction talks about various beta distributions. Beta distributions are determined by the tuning parameters a and b. if a = b = 1, this is the uniform distribution. If a = b = 1/2, this is the arc-sine distribution which are used in random walks. When a + b = 1, and a != 1/2, these are generalized arc-sine distributions.
+
+maximum likelihood estimators of the beta distribution parameters can be severely biased. This article focuses on 3 techniques to reduce bias.
+
+Beta Distribution:
+$$
+f(y; a, b) = \frac{\Gamma(a + b)}{\Gamma(a)\Gamma(b)}y^{a-1}(1 - y)^{b-1}
+$$
+
+This article is all about estimating a and b.
+
+Log likelihood function:
+$$
+\ell(a, b) = n \left(  (a - 1)log\ g_1 + (b - 1)log\ g_2 + log \left(\frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}\right) \right)
+$$
+Where $g_1$ and $g_2$ are the geometric mean of the $y_i$ and $1 - y_i$ respectively.
+
+The likelihood estimators of a and b are the solution to this system of equations
+
+$$
+\psi(a) - \psi(a + b) = log\ g_1
+$$
+$$
+\psi(b) - \psi(a + b) = log\ g_2
+$$
+
+Where $\psi$ is the digamma function.
+
+Section III talks about improving the bias of likelihood estimators. 
+
+$$
+E(\theta - \hat{\theta}) = \frac{b(\theta)}{n} + O(n^2)
+$$
+
+Cox & Snell (1968) came up with a complicated formula for estimating $b(\theta)$.

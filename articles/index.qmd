@@ -1,8 +1,7 @@
 ---
 title: "Articles"
-subtitle: "Articles"
 author: "Travis Keep (Advisor: Dr. Seals)"
-date: '`r Sys.Date()`'
+date: "8 September 2024"
 format:
   html:
     code-fold: true
@@ -21,4 +20,7 @@ editor:
 - [A Case for Beta Regression in the Natural Sciences](case_for_beta_regression_natural_sciences.html){target="_blank"}
 - [On beta regression residuals](beta_regression_residuals.html){target="_blank"}
 - [Beta Regression For Modelling Rates And Proportions](beta_regression.html){target="_blank}
+- [Nearly Unbiased Maximum Likelihood Estimation for the Beta Distribution](max_likelihood_estimation_for_beta_distribution.html){target="_blank"}
+- [Extended Beta Regression in R](beta_regression_in_r.html){target="_blank"}
+- [A better lemon-squeezer? Maximum likelihood regression with beta-distribuited dependent variables](a_better_lemon_squeezer.html){target="_blank"}
 

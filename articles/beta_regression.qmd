@@ -1,8 +1,7 @@
 ---
 title: "Summary of 'Beta Regression For Modelling Rates And Proportions'"
-subtitle: "Summary of 'Beta Regression For Modelling Rates And Proportions'"
 author: "Travis Keep (Advisor: Dr. Seals)"
-date: '`r Sys.Date()`'
+date: "8 September 2024"
 format:
   html:
     code-fold: true
@@ -20,7 +19,8 @@ editor:
 
 https://www.ime.usp.br/~sferrari/beta.pdf
 
-(I’d like to learn how to get the real citation for this)
+Ferrari SLP, Cribari-Neto F (2004). “Beta Regression for Modelling Rates and Proportions.”
+Journal of Applied Statistics, 31(7), 799–815.
 
  In Beta distribution, there are two tuning parameters a and b. Mean and variance are the following
  
