@@ -18,6 +18,7 @@ editor:
 ---
 
 Grün, Bettina; Kosmidis, Ioannis; Zeileis, Achim (2012). "Extended Beta Regression in R: Shaken, Stirred, Mixed, and Partitioned" (PDF). cran.r-project.org.
+doi=10.18637/jss.v048.i11
 
 The introduction of this article talks about Beta regression. It first talks about the Beta Distribution and the two parameters that control it,$\mu$ and $\phi$.  The mean is $\mu$; the variance is $\frac{\mu(1 – \mu)}{1 + \phi}$. The introduction then talks about the betareg R package and how it features a two part model: one for $\mu$ and one for $\phi$. Betareg uses the optim() function internally to estimate $\mu$ and $\phi$.
 

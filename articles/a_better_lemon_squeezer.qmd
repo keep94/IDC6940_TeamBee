@@ -19,6 +19,7 @@ editor:
 
 M. Smithson and J. Verkuilen, A better lemon-squeezer? Maximum likelihood regression with beta-distribuited
 dependent variables Psycholog. Meth. 11 (2006), pp. 54–71.
+DOI:10.1037/1082-989X.11.1.54
 
 
 Introduction starts out with reading test scores, N=44 based on IQ and whether or not the child is dyslexic. The scores are converted to (0, 1) using linear transformation. Using conventional linear regression with a logit transformation, shows that IQ alone does not affect reading score, which is not actually the case.

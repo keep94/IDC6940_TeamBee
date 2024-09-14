@@ -21,6 +21,7 @@ https://www.ime.usp.br/~sferrari/beta.pdf
 
 Ferrari SLP, Cribari-Neto F (2004). “Beta Regression for Modelling Rates and Proportions.”
 Journal of Applied Statistics, 31(7), 799–815.
+DOI: 10.1080/0266476042000214501
 
  In Beta distribution, there are two tuning parameters a and b. Mean and variance are the following
  
