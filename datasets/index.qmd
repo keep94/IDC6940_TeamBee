@@ -1,0 +1,64 @@
+---
+title: "Datasets"
+author: "Travis Keep (Advisor: Dr. Seals)"
+date: '`r Sys.Date()`'
+format:
+  html:
+    code-fold: true
+course: Capstone Projects in Data Science
+#always_allow_html: true # this allows to get PDF with HTML features
+self-contained: true
+execute: 
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+The first data set I looked at is reading scores included with the R betareg package. This dataset explores reading skills for 44 school aged children. It is significant
+because it shows that beta regression shows that IQ alone is significant in predicting reading scores while regular regression techniques show that IQ alone is not significant in predicting reading scores.
+
+Here are the description of the columns
+
+| Name | Type | Description |
+|------|------|-------------|
+| accuracy | numeric | Reading score with max of 0.99 |
+| dyslexia | character | Yes for dyslexic, No for not dyslexic |
+| iq | numeric | Non verbal intelligence quotient transform to z score |
+| accuracy1 | numeric | same as accuracy but score goes up to 1.0 |
+
+```{r, warning=FALSE, echo=T, message=FALSE}
+library(betareg)
+data("ReadingSkills")
+head(ReadingSkills)
+```
+
+The second dataset I looked at is the percentage of crude oil converted to gasoline under 32 different conditions.
+
+Here are the descriptions of the columns
+
+| Name | Type | Description |
+|------|------|-------------|
+| yield | numeric | proportion of crude oil converted to gasoline |
+| gravity | numeric | The density of the crude oil. The higher the API the less dense the oil. 10 is the density of water. |
+| pressure | numeric | vapor pressure of crude oil in pounds per square inch.
+| temp10 | numeric | temp in F at which 10% of crude oil has vaporized |
+| temp | numeric | temp in F at which all gasoline has vaporized |
+| batch | ordinal | indicates particular gravity, pressure, and temp10 |
+
+```{r, warning=FALSE, echo=T, message=FALSE}
+library(betareg)
+data("GasolineYield")
+head(GasolineYield)
+```
+
+```{r, warning=FALSE, echo=T, message=FALSE}
+# loading packages 
+library(tidyverse)
+library(knitr)
+library(ggthemes)
+library(ggrepel)
+library(dslabs)
+```
+
