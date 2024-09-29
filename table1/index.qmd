@@ -64,6 +64,9 @@ coords <- aes(x=iq, y=accuracy1)
 ggplot(ReadingSkills, coords) + geom_point(aes(color=dyslexia)) + labs(x="IQ", y="score")
 ```
 
+## Conclusion
+The table1 and plot indicate that whether or not a child has dyslexia is significant in predicting the reading skills score. Also, they indicate that in this study, the non dyslexic children seemed to have higher IQs than the dyslexic children.
+
 ```{r, warning=FALSE, echo=T, message=FALSE}
 # loading packages 
 library(tidyverse)
