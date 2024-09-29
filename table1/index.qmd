@@ -16,6 +16,22 @@ editor:
     wrap: 72
 ---
 
+## ReadingSkills dataset
+
+This is the ReadingSkills dataset included with the R betareg package. This dataset explores reading skills for 44 school aged children. It is significant
+because it shows that beta regression shows that IQ alone is significant in predicting reading scores while regular regression techniques show that IQ alone is not significant in predicting reading scores.
+
+Here are the description of the columns
+
+| Name | Type | Description |
+|------|------|-------------|
+| accuracy | numeric | Reading score with max of 0.99 |
+| dyslexia | character | Yes for dyslexic, No for not dyslexic |
+| iq | numeric | Non verbal intelligence quotient transform to z score |
+| accuracy1 | numeric | same as accuracy but score goes up to 1.0 |
+
+
+
 ```{r, warning=FALSE, echo=T, message=FALSE}
 library(betareg)
 library(dplyr)
@@ -42,6 +58,11 @@ Table1: Student ReadingSkills data stratified by dyslexia
 | IQ (Z score) | min `r iq_stats[1, 1]`<br>median `r iq_stats[1, 2]`<br>max `r iq_stats[1, 3]` |  min `r iq_dyslexia_stats[1, 1]`<br>median `r iq_dyslexia_stats[1, 2]`<br>max `r iq_dyslexia_stats[1, 3]` | min `r iq_normal_stats[1, 1]`<br>median `r iq_normal_stats[1, 2]`<br>max `r iq_normal_stats[1, 3]` |
 | Reading Score | min `r score_stats[1, 1]`<br>median `r score_stats[1, 2]`<br>max `r score_stats[1, 3]` | min `r score_dyslexia_stats[1, 1]`<br>median `r score_dyslexia_stats[1, 2]`<br>max `r score_dyslexia_stats[1, 3]` |  min `r score_normal_stats[1, 1]`<br>median `r score_normal_stats[1, 2]`<br>max `r score_normal_stats[1, 3]` |
 
+```{r, warning=F, echo=T, message=F}
+library(ggplot2)
+coords <- aes(x=iq, y=accuracy1)
+ggplot(ReadingSkills, coords) + geom_point(aes(color=dyslexia)) + labs(x="IQ", y="score")
+```
 
 ```{r, warning=FALSE, echo=T, message=FALSE}
 # loading packages 
