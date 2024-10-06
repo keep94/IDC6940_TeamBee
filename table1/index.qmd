@@ -1,5 +1,5 @@
 ---
-title: "Table1"
+title: "ReadingSkills Dataset: Table1 plus Analysis"
 author: "Travis Keep (Advisor: Dr. Seals)"
 date: '`r Sys.Date()`'
 format:
@@ -62,6 +62,27 @@ Table1: Student ReadingSkills data stratified by dyslexia
 library(ggplot2)
 coords <- aes(x=iq, y=accuracy1)
 ggplot(ReadingSkills, coords) + geom_point(aes(color=dyslexia)) + labs(x="IQ", y="score")
+```
+
+## Analysis
+
+In this section, we do beta regression analysis on the ReadingSkills data set. To visualise the regression, we split the results into dyslexic children and normal children
+
+```{r, warning=F, echo=T, message=F}
+
+ReadingSkillsModel <- ReadingSkills %>% mutate(dcode=ifelse(dyslexia == "no", -0.5, 0.5))
+
+model <- betareg(accuracy ~ dcode*iq | dcode*iq, data=ReadingSkillsModel, type="BC")
+summary(model)
+
+dyslexiaModel <- ReadingSkillsModel %>% filter(dyslexia == "yes")
+normalModel <- ReadingSkillsModel %>% filter(dyslexia == "no")
+
+ggplot() + geom_point(aes(x=normalModel$iq, y=normalModel$accuracy), color="red") + geom_line(aes(x=normalModel$iq, y=predict(model, newdata=normalModel)), color="red") + xlab("IQ") + ylab("Score") + ggtitle("Score by IQ for normal students")
+
+ggplot() + geom_point(aes(x=dyslexiaModel$iq, y=dyslexiaModel$accuracy), color="blue") + geom_line(aes(x=dyslexiaModel$iq, y=predict(model, newdata=dyslexiaModel)), color="blue") + xlab("IQ") + ylab("Score") + ggtitle("Score by IQ for dyslexic students") 
+
+
 ```
 
 ## Conclusion
