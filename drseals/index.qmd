@@ -1,0 +1,52 @@
+---
+title: "More Analysis on ReadingSkills data set"
+author: "Travis Keep (Advisor: Dr. Seals)"
+date: '`r Sys.Date()`'
+format:
+  html:
+    code-fold: true
+course: Capstone Projects in Data Science
+#always_allow_html: true # this allows to get PDF with HTML features
+self-contained: true
+execute: 
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+
+
+```{r, warning=FALSE, echo=T, message=FALSE}
+library(betareg)
+library(dplyr)
+library(magrittr)
+data("ReadingSkills")
+
+ReadingSkillsModel <- ReadingSkills %>% mutate(dcode=ifelse(dyslexia == "no", -0.5, 0.5))
+
+full.model <- betareg(accuracy ~ dcode*iq | dcode*iq, data=ReadingSkillsModel, type="BC")
+summary(full.model)
+
+constant.phi <- betareg(accuracy ~ dcode*iq, data=ReadingSkillsModel, type="BC")
+summary(constant.phi)
+
+```
+
+## Conclusion
+
+I think the constant phi model is best with R^2 = 0.6067. But in this model, IQ and dyslexia:iq are not significant predictors of mu. When I model phi as dyslexia\*iq, then R^2 drops to 0.5089 but IQ and dyslexia:iq become significant predictors of mu.
+
+
+
+```{r, warning=FALSE, echo=T, message=FALSE}
+# loading packages 
+library(tidyverse)
+library(knitr)
+library(ggthemes)
+library(ggrepel)
+library(dslabs)
+```
+
