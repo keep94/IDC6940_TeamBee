@@ -66,13 +66,13 @@ ggplot(ReadingSkills, coords) + geom_point(aes(color=dyslexia)) + labs(x="IQ", y
 
 ## Analysis
 
-In this section, we do beta regression analysis on the ReadingSkills data set. To visualise the regression, we split the results into dyslexic children and normal children
+In this section, we do beta regression analysis on the ReadingSkills data set. To visualise the regression, we split the results into dyslexic children and normal children. We model phi as constant as that gives a pseduo $R^2$ of 0.6067 instead of 0.5089.  
 
 ```{r, warning=F, echo=T, message=F}
 
 ReadingSkillsModel <- ReadingSkills %>% mutate(dcode=ifelse(dyslexia == "no", -0.5, 0.5))
 
-model <- betareg(accuracy ~ dcode*iq | dcode*iq, data=ReadingSkillsModel, type="BC")
+model <- betareg(accuracy ~ dcode*iq, data=ReadingSkillsModel, type="BC")
 summary(model)
 
 dyslexiaModel <- ReadingSkillsModel %>% filter(dyslexia == "yes")
