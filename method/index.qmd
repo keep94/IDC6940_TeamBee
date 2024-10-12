@@ -1,0 +1,216 @@
+---
+title: "Methods Writeup"
+author: "Travis Keep (Advisor: Dr. Seals)"
+date: '`r Sys.Date()`'
+format:
+  html:
+    code-fold: true
+course: Capstone Projects in Data Science
+bibliography: references.bib # file contains bibtex for references
+csl: ieee.csl
+#always_allow_html: true # this allows to get PDF with HTML features
+self-contained: true
+execute: 
+  warning: false
+  message: false
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+While normal linear regression has many useful applications, it does not accurately explain all models. For instance, normal linear regression does not always provide good models where the dependent variable has a definite minimum and maximum. Test scores are a good example, where scores typically fall between 0 and 100. In this paper, we discuss a new method, beta regression, and how it often does a better job of explaining data with a definite minimum and maximum, and we discuss how beta regression can be used in R.
+
+First we discuss general linear regression. In general linear regression, the dependent variable is modeled as a linear combination of the regressors in the model plus some constant. For example $\hat{y}=\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \cdots$. The $\beta_i$'s are chosen to minimise the the Sum of Squares error which is
+
+$$
+SSE = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+$$
+The interpretation of the $\beta_i$ is as follows. If the regressosr $x_i$ increases by 1, then $\hat{y}$ increases by $\beta_i$. [@kutner2004]. 
+
+An ANOVA table can test the significance of a general linear regression model. 
+
+$$
+\begin{align}
+SST &= \sum_{i=1}^{n} (y_i - \bar{y})^2 \\
+SSR &= \sum_{i=1}^{n} (\hat{y_i} - \bar{y})^2 \\
+SSE &= \sum_{i=1}^{n} (y_i - \hat{y_i})^2
+\end{align}
+$$
+Where SST is the total variance of Y; SSR is the variance explained by the model. SSE is the variance not explained by the model. [@kutner2004].
+
+ANOVA table
+
+| Sum of Squares | degrees of freedom | Mean Square | F |
+| -------------- | ------------------ | ----------- | - |
+| SSR | p | $MSR=\frac{SSR}{p}$ | |
+| SSE | n - p - 1 | $MSE=\frac{SSE}{n-p-1}$ | $\frac{MSR}{MSE}$ |
+| SST | n - 1 | | |
+
+$p$ is the number of betas excluding $\beta_0$.
+
+if $F > F_\alpha(p, n-p-1)$ then the model is significant. [@kutner2004].
+
+## Why General Linear Regression is not Always Suitable
+
+General linear regression assumes that the error terms $\epsilon = y_i - \hat{y_i}$ follow a normal distribution with constant variance across all the i's. When the dependent variable has a definite minumum and maximum such as a ratio or percentage, this assumption that general linear regression makes does not hold. The variance of the error terms is not constant, but becomes less when the dependent variable gets close to its minimum or maximum. Sometimes we must assume that the dependent variable follows a beta distribution instead of a normal distribution. 
+
+## Beta Distribution
+
+The beta distribution is for a random variable that falls on the open set (0, 1). Note that it is possible to scale any random variable with a definite minimum and maximum to this interval. Below is the PDF for the beta distribution. 
+
+$$
+f(y) = \begin{cases}
+      \frac{y^{\alpha-1}(1-y)^{\beta-1}}{B(\alpha,\beta)}, & 0 \le y \le 1 \\
+      0, & \text{elsewhere}
+\end{cases}
+$$
+Where $B(\alpha,\beta) = \int_0^1 y^{\alpha-1}(1-y)^{\beta-1} \ dy = \frac{\Gamma(\alpha) \Gamma(\beta)}{\Gamma(\alpha+\beta)}.$
+
+$\alpha$ and $\beta$ are the shape variables where $\alpha > 0 \quad \beta > 0$.
+[@wackerly2002]
+
+$$
+E[Y] = \mu = \frac{\alpha}{\alpha+\beta} \ \ \ \text{and} \ \ \ V[Y] = \sigma^2  = \frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}
+$$
+[@wackerly2002]
+
+For beta regression it is useful to introduce the following,
+
+$$
+\begin{align}
+\mu &= \frac{\alpha}{\alpha+\beta} \\
+\phi &= \alpha + \beta
+\end{align}
+$$
+$\mu$ is the mean of the beta regression while the higher the $\phi$ the less the variance or the less spread out the PDF function is. [@ferrari2004]
+
+We can rewrite the beta distribution PDF function in terms of $\mu$ and $\phi$.
+
+$$
+f(y; \mu, \phi) = \frac{\Gamma(\phi)}{\Gamma(\mu \phi) \Gamma((1 - \mu)\phi)} y^{\mu\phi - 1}(1 - y)^{(1 - \mu)\phi - 1}, \quad 0 < y < 1
+$$
+Where:\
+- **(μ)** is the mean, **(ϕ)** is the precision (inverse of the variance), **(Γ)** is the gamma function.
+
+$$
+\text{Var}(Y) = \frac{\mu(1 - \mu)}{1 + \phi}
+$$
+When $\mu$ is near the extremes, 0 or 1, variance drops. [@ferrari2004]
+
+## Beta Regression
+
+With beta regression, we first scale the dependent variable so that it falls on the (0, 1) interval. We then apply the logit function to the dependent variable.
+
+$$
+logit(p) = log \left(\frac{p}{1-p}\right)
+$$
+The logit function transforms the input value, which is between 0 and 1, to all the real values. The result of the logit function can be anywhere between $-\infty$ and $+\infty$. 
+
+Beta regression aims to create more accurate models when the dependent variable falls within a certain range such as between 0 and 1. Beta regression assumes that at a given point, the dependent variable follows a beta distribution instead of a normal distribution [@grun2012].
+
+We apply the logit function to the dependent variable, $\mu_i$, and fit a linear model to that. Unlike linear regression, we also apply the natural logarithm function to phi and fit a linear model to that. [@smithson2006]. So we have
+
+$$
+logit(\mu_i) = x_i\beta
+$$
+$$
+ln(\phi_i) = -w_i\delta
+$$
+
+[@smithson2006]. Note that $w_i$ is often some subset of $x_i$. The minus sign is in the second equation so that larger coefficients in $\delta$ mean a larger variance. [@smithson2006]. We find the coefficients of $\beta$ and $\delta$ by maximizing the log likelihood function which is in terms of $\beta$ and $\delta$.  R supports three methods for finding the $\beta_i$ and $\delta_i$, ML which is just standard maximum likelihood. BC, which is maximum likelihood with bias correction, and BR which is maximum likelihood with bias reduction [@grun2012].
+
+Note that $\phi$ can be modeled as being constant throughout or it can be modeled as being dependent on certain regressors [@smithson2006].
+
+With $\beta$ we can predict $\mu$ as follows: 
+
+$$
+\mu = \frac{e^{x \beta}}{e^{x \beta} + 1}
+$$
+
+Like in linear regression, the $\beta_i$ have a definite interpretation. If $x_i$ increases by 1 with all other regressors remaining the same, the odds of $\mu$ multiply by $e^{b_i}$. Where the odds of $\mu$ are $\frac{\mu}{1-\mu}$ [@ferrari2004].
+
+## ReadingSkills Dataset
+
+This is the ReadingSkills dataset included with the R betareg package. This dataset explores reading skills for 44 school aged children. It is significant because it shows that beta regression shows that IQ alone is significant in predicting reading scores while regular regression techniques show that IQ alone is not significant in predicting reading scores.
+
+Here are the description of the columns
+
+| Name | Type | Description |
+|------|------|-------------|
+| accuracy | numeric | Reading score with max of 0.99 |
+| dyslexia | character | Yes for dyslexic, No for not dyslexic |
+| iq | numeric | Non verbal intelligence quotient transform to z score |
+| accuracy1 | numeric | same as accuracy but score goes up to 1.0 |
+
+
+
+```{r, warning=FALSE, echo=T, message=FALSE}
+library(betareg)
+library(dplyr)
+library(magrittr)
+data("ReadingSkills")
+
+dyslexia <- ReadingSkills %>% filter(dyslexia == "yes")
+normal <- ReadingSkills %>% filter(dyslexia == "no")
+n <- (ReadingSkills %>% dim)[1]
+ndyslexia <- (dyslexia %>% dim)[1]
+nnormal <- (normal %>% dim)[1]
+iq_stats <- ReadingSkills %>% summarize(min(iq), median(iq), max(iq))
+iq_dyslexia_stats <- dyslexia %>% summarize(min(iq), median(iq), max(iq))
+iq_normal_stats <- normal %>% summarize(min(iq), median(iq), max(iq))
+score_stats <- ReadingSkills %>% summarize(min(accuracy1), median(accuracy1), max(accuracy1))
+score_dyslexia_stats <- dyslexia %>% summarize(min(accuracy1), median(accuracy1), max(accuracy1))
+score_normal_stats <- normal %>% summarize(min(accuracy1), median(accuracy1), max(accuracy1))
+```
+
+Table1: Student ReadingSkills data stratified by dyslexia
+
+| student characteristic | Total(n=`r n`) | Dyslexia(n=`r ndyslexia`) | Normal(n=`r nnormal`) |
+|------------------------|-------------|----------------|--------------|
+| IQ (Z score) | min `r iq_stats[1, 1]`<br>median `r iq_stats[1, 2]`<br>max `r iq_stats[1, 3]` |  min `r iq_dyslexia_stats[1, 1]`<br>median `r iq_dyslexia_stats[1, 2]`<br>max `r iq_dyslexia_stats[1, 3]` | min `r iq_normal_stats[1, 1]`<br>median `r iq_normal_stats[1, 2]`<br>max `r iq_normal_stats[1, 3]` |
+| Reading Score | min `r score_stats[1, 1]`<br>median `r score_stats[1, 2]`<br>max `r score_stats[1, 3]` | min `r score_dyslexia_stats[1, 1]`<br>median `r score_dyslexia_stats[1, 2]`<br>max `r score_dyslexia_stats[1, 3]` |  min `r score_normal_stats[1, 1]`<br>median `r score_normal_stats[1, 2]`<br>max `r score_normal_stats[1, 3]` |
+
+```{r, warning=F, echo=T, message=F}
+library(ggplot2)
+coords <- aes(x=iq, y=accuracy1)
+ggplot(ReadingSkills, coords) + geom_point(aes(color=dyslexia)) + labs(x="IQ", y="score")
+```
+
+
+## Analysis
+
+In this section, we do beta regression analysis on the ReadingSkills data set. First, we add a numeric equivalent for dyslexia, dcode, to our dataset. For "no", we code -0.5; for "yes" we code 0.5. We use the full model for $\mu$ (dcode, iq, and dcode:iq), but we model $\phi$ as being constant. This raises our pseudo R^2 from 0.5089, when we used the full model for $\phi$, to 0.6067. We use "BC" (Bias Correction) which is the same as maximumm likelihood except it corrects for bias. To visualise the regression, we split the results into dyslexic children and normal children [@francisco2010].
+
+```{r, warning=F, echo=T, message=F}
+
+ReadingSkillsModel <- ReadingSkills %>% mutate(dcode=ifelse(dyslexia == "no", -0.5, 0.5))
+
+model <- betareg(accuracy ~ dcode*iq, data=ReadingSkillsModel, type="BC")
+summary(model)
+
+dyslexiaModel <- ReadingSkillsModel %>% filter(dyslexia == "yes")
+normalModel <- ReadingSkillsModel %>% filter(dyslexia == "no")
+
+ggplot() + geom_point(aes(x=normalModel$iq, y=normalModel$accuracy), color="red") + geom_line(aes(x=normalModel$iq, y=predict(model, newdata=normalModel)), color="red") + xlab("IQ") + ylab("Score") + ggtitle("Score by IQ for normal students")
+
+ggplot() + geom_point(aes(x=dyslexiaModel$iq, y=dyslexiaModel$accuracy), color="blue") + geom_line(aes(x=dyslexiaModel$iq, y=predict(model, newdata=dyslexiaModel)), color="blue") + xlab("IQ") + ylab("Score") + ggtitle("Score by IQ for dyslexic students")
+
+
+```
+
+
+## Conclusion
+
+In conclusion, beta regression is good to use when the dependent variable has a definite lower and upper bound such as a ratio or percentage. 
+
+
+```{r, warning=FALSE, echo=T, message=FALSE}
+# loading packages 
+library(tidyverse)
+library(knitr)
+library(ggthemes)
+library(ggrepel)
+library(dslabs)
+```
+
+## References
