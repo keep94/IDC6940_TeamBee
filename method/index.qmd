@@ -188,12 +188,23 @@ ReadingSkillsModel <- ReadingSkills %>% mutate(dcode=ifelse(dyslexia == "no", -0
 model <- betareg(accuracy ~ dcode*iq, data=ReadingSkillsModel, type="BC")
 summary(model)
 
+linmodel <- glm(accuracy ~ dcode*iq, family=gaussian(link="logit"), data=ReadingSkillsModel)
+summary(linmodel)
+
 dyslexiaModel <- ReadingSkillsModel %>% filter(dyslexia == "yes")
 normalModel <- ReadingSkillsModel %>% filter(dyslexia == "no")
 
-ggplot() + geom_point(aes(x=normalModel$iq, y=normalModel$accuracy), color="red") + geom_line(aes(x=normalModel$iq, y=predict(model, newdata=normalModel)), color="red") + xlab("IQ") + ylab("Score") + ggtitle("Score by IQ for normal students")
+ggplot() + geom_point(aes(x=normalModel$iq, y=normalModel$accuracy), color="red") +
+geom_line(aes(x=normalModel$iq, y=predict(model, newdata=normalModel), color="beta")) +
+geom_line(aes(x=normalModel$iq, y=plogis(predict(linmodel, newdata=normalModel)), color="glm")) +
+xlab("IQ (Z-score)") + ylab("Score") + ggtitle("Score by IQ for normal students") +
+scale_color_manual(name="Regression Model", breaks=c("beta", "glm"), values=c("beta"="red", "glm"="green"))
 
-ggplot() + geom_point(aes(x=dyslexiaModel$iq, y=dyslexiaModel$accuracy), color="blue") + geom_line(aes(x=dyslexiaModel$iq, y=predict(model, newdata=dyslexiaModel)), color="blue") + xlab("IQ") + ylab("Score") + ggtitle("Score by IQ for dyslexic students")
+ggplot() + geom_point(aes(x=dyslexiaModel$iq, y=dyslexiaModel$accuracy), color="blue") + 
+geom_line(aes(x=dyslexiaModel$iq, y=predict(model, newdata=dyslexiaModel), color="beta")) +
+geom_line(aes(x=dyslexiaModel$iq, y=plogis(predict(linmodel, newdata=dyslexiaModel)), color="glm")) +
+xlab("IQ (Z-score)") + ylab("Score") + ggtitle("Score by IQ for dyslexic students") +
+scale_color_manual(name="Regression Model", breaks=c("beta", "glm"), values=c("beta"="blue", "glm"="green"))
 
 
 ```
