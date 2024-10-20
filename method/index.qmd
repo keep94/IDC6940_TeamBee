@@ -212,7 +212,7 @@ scale_color_manual(name="Regression Model", breaks=c("beta", "glm"), values=c("b
 
 ## Conclusion
 
-In conclusion, beta regression is good to use when the dependent variable has a definite lower and upper bound such as a ratio or percentage. 
+In conclusion, beta regression is good to use when the dependent variable has a definite lower and upper bound such as a ratio or percentage. In the ReadingSkills dataset, both beta regression and normal linear regression with logit link show that in normal students as IQ goes up so do reading scores, but for dyslexic children, higher IQ generally means a slightly lower reading score.
 
 
 ```{r, warning=FALSE, echo=T, message=FALSE}
