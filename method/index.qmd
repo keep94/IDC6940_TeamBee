@@ -181,6 +181,15 @@ ggplot(ReadingSkills, coords) + geom_point(aes(color=dyslexia)) + labs(x="IQ", y
 
 In this section, we do beta regression analysis on the ReadingSkills data set. First, we add a numeric equivalent for dyslexia, dcode, to our dataset. For "no", we code -0.5; for "yes" we code 0.5. We use the full model for $\mu$ (dcode, iq, and dcode:iq), but we model $\phi$ as being constant. This raises our pseudo R^2 from 0.5089, when we used the full model for $\phi$, to 0.6067. We use "BC" (Bias Correction) which is the same as maximumm likelihood except it corrects for bias. To visualise the regression, we split the results into dyslexic children and normal children [@francisco2010].
 
+In addition to the beta regression, we also do general linear regression using the logit link function. logit has the special property of transforming test scores falling on the interval (0, 1) to values falling on the set $\mathbb{R}$. When predicting, test scores with this model, we apply the inverse logit function to map from the $\mathbb{R}$ back to the interval (0, 1) [@R-base].
+
+$$
+\begin{align}
+logit(p) &= log \left( \frac{p}{1-p} \right) \\
+invlogit(p) &= \frac{e^p}{e^p + 1}
+\end{align}
+$$
+
 ```{r, warning=F, echo=T, message=F}
 
 ReadingSkillsModel <- ReadingSkills %>% mutate(dcode=ifelse(dyslexia == "no", -0.5, 0.5))

@@ -3480,6 +3480,13 @@ ln(\phi_i) = -w_i\delta
 <section id="analysis" class="level2">
 <h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
 <p>In this section, we do beta regression analysis on the ReadingSkills data set. First, we add a numeric equivalent for dyslexia, dcode, to our dataset. For “no”, we code -0.5; for “yes” we code 0.5. We use the full model for <span class="math inline">\(\mu\)</span> (dcode, iq, and dcode:iq), but we model <span class="math inline">\(\phi\)</span> as being constant. This raises our pseudo R^2 from 0.5089, when we used the full model for <span class="math inline">\(\phi\)</span>, to 0.6067. We use “BC” (Bias Correction) which is the same as maximumm likelihood except it corrects for bias. To visualise the regression, we split the results into dyslexic children and normal children <span class="citation" data-cites="francisco2010"><a href="#ref-francisco2010" role="doc-biblioref">[6]</a></span>.</p>
+<p>In addition to the beta regression, we also do general linear regression using the logit link function. logit has the special property of transforming test scores falling on the interval (0, 1) to values falling on the set <span class="math inline">\(\mathbb{R}\)</span>. When predicting, test scores with this model, we apply the inverse logit function to map from the <span class="math inline">\(\mathbb{R}\)</span> back to the interval (0, 1) <span class="citation" data-cites="R-base"><a href="#ref-R-base" role="doc-biblioref">[7]</a></span>.</p>
+<p><span class="math display">\[
+\begin{align}
+logit(p) &amp;= log \left( \frac{p}{1-p} \right) \\
+invlogit(p) &amp;= \frac{e^p}{e^p + 1}
+\end{align}
+\]</span></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -3620,6 +3627,9 @@ Number of Fisher Scoring iterations: 7</code></pre>
 </div>
 <div id="ref-francisco2010" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[6] </div><div class="csl-right-inline">F. Cribari-Neto and A. Zeileis, <span>“Beta regression in <span>R</span>,”</span> <em>Journal of Statistical Software</em>, vol. 34, no. 2, pp. 1–24, 2010, doi: <a href="https://doi.org/10.18637/jss.v034.i02">10.18637/jss.v034.i02</a>.</div>
+</div>
+<div id="ref-R-base" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">R Core Team, <em>R: A language and environment for statistical computing</em>. Vienna, Austria: R Foundation for Statistical Computing, 2021. Available: <a href="https://www.R-project.org">https://www.R-project.org</a></div>
 </div>
 </div></section></div></main>
 <!-- /main column -->
