@@ -217,6 +217,20 @@ scale_color_manual(name="Regression Model", breaks=c("beta", "glm"), values=c("b
 
 
 ```
+## Beta Regression Coefficients
+
+```{r, warning=F, echo=T, message=F}
+
+model.summary <- summary(model)
+
+coefs <- model.summary$coefficients$mean
+
+```
+| Variable | Beta | SE | p |
+| -------- | ---- | -- | - |
+| dyslexia | `r sprintf('%0.4g', coefs['dcode', 1])` | `r sprintf('%0.4g', coefs['dcode', 2])` | `r sprintf('%0.4g', coefs['dcode', 4])` |
+| IQ | `r sprintf('%0.4g', coefs['iq', 1])` | `r sprintf('%0.4g', coefs['iq', 2])` | `r sprintf('%0.4g', coefs['iq', 4])` |
+| dyslexia:IQ | `r sprintf('%0.4g', coefs['dcode:iq', 1])` | `r sprintf('%0.4g', coefs['dcode:iq', 2])` | `r sprintf('%0.4g', coefs['dcode:iq', 4])` |
 
 
 ## Conclusion
