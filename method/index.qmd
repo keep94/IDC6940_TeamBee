@@ -163,12 +163,73 @@ score_dyslexia_stats <- dyslexia %>% summarize(min(accuracy1), median(accuracy1)
 score_normal_stats <- normal %>% summarize(min(accuracy1), median(accuracy1), max(accuracy1))
 ```
 
-Table1: Student ReadingSkills data stratified by dyslexia
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-kg9c{background-color:#D9D9D9;border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-0thz{border-color:inherit;font-weight:bold;text-align:left;vertical-align:bottom}
+.tg .tg-j6zm{font-weight:bold;text-align:left;vertical-align:bottom}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-za14{border-color:inherit;text-align:left;vertical-align:bottom}
+.tg .tg-7zrl{text-align:left;vertical-align:bottom}
+</style>
+<table class="tg"><thead>
+  <tr>
+    <th class="tg-kg9c" colspan="5" rowspan="2">Table 1: Student ReadingSkills data stratified by dyslexia</th>
+  </tr>
+  <tr>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="tg-0thz" colspan="2"><span style="font-weight:bold">Student Characteristic</span></td>
+    <td class="tg-0thz"><span style="font-weight:bold">Total (n=`r n`)</span></td>
+    <td class="tg-0thz"><span style="font-weight:bold">Dyslexia (n=`r ndyslexia`)</span></td>
+    <td class="tg-j6zm"><span style="font-weight:bold">Normal (n=`r nnormal`)</span></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky" rowspan="3">IQ (Z-Score)</td>
+    <td class="tg-0pky">min</td>
+    <td class="tg-za14">`r iq_stats[1, 1]`</td>
+    <td class="tg-za14">`r iq_dyslexia_stats[1, 1]`</td>
+    <td class="tg-za14">`r iq_normal_stats[1, 1]`</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">median</td>
+    <td class="tg-za14">`r iq_stats[1, 2]`</td>
+    <td class="tg-za14">`r iq_dyslexia_stats[1, 2]`</td>
+    <td class="tg-za14">`r iq_normal_stats[1, 2]`</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">max</td>
+    <td class="tg-za14">`r iq_stats[1, 3]`</td>
+    <td class="tg-za14">`r iq_dyslexia_stats[1, 3]`</td>
+    <td class="tg-za14">`r iq_normal_stats[1, 3]`</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky" rowspan="3">Reading Score</td>
+    <td class="tg-0pky">min</td>
+    <td class="tg-za14">`r score_stats[1, 1]`</td>
+    <td class="tg-za14">`r score_dyslexia_stats[1, 1]`</td>
+    <td class="tg-za14">`r score_normal_stats[1, 1]`</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">median</td>
+    <td class="tg-za14">`r score_stats[1, 2]`</td>
+    <td class="tg-za14">`r score_dyslexia_stats[1, 2]`</td>
+    <td class="tg-za14">`r score_normal_stats[1, 2]`</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">max</td>
+    <td class="tg-za14">`r score_stats[1, 3]`</td>
+    <td class="tg-za14">`r score_dyslexia_stats[1, 3]`</td>
+    <td class="tg-za14">`r score_normal_stats[1, 3]`</td>
+  </tr>
+</tbody></table>
 
-| student characteristic | Total(n=`r n`) | Dyslexia(n=`r ndyslexia`) | Normal(n=`r nnormal`) |
-|------------------------|-------------|----------------|--------------|
-| IQ (Z score) | min `r iq_stats[1, 1]`<br>median `r iq_stats[1, 2]`<br>max `r iq_stats[1, 3]` |  min `r iq_dyslexia_stats[1, 1]`<br>median `r iq_dyslexia_stats[1, 2]`<br>max `r iq_dyslexia_stats[1, 3]` | min `r iq_normal_stats[1, 1]`<br>median `r iq_normal_stats[1, 2]`<br>max `r iq_normal_stats[1, 3]` |
-| Reading Score | min `r score_stats[1, 1]`<br>median `r score_stats[1, 2]`<br>max `r score_stats[1, 3]` | min `r score_dyslexia_stats[1, 1]`<br>median `r score_dyslexia_stats[1, 2]`<br>max `r score_dyslexia_stats[1, 3]` |  min `r score_normal_stats[1, 1]`<br>median `r score_normal_stats[1, 2]`<br>max `r score_normal_stats[1, 3]` |
+
 
 ```{r, warning=F, echo=T, message=F}
 library(ggplot2)
@@ -179,7 +240,7 @@ ggplot(ReadingSkills, coords) + geom_point(aes(color=dyslexia)) + labs(x="IQ", y
 
 ## Analysis
 
-In this section, we do beta regression analysis on the ReadingSkills data set. First, we add a numeric equivalent for dyslexia, dcode, to our dataset. For "no", we code -0.5; for "yes" we code 0.5. We use the full model for $\mu$ (dcode, iq, and dcode:iq), but we model $\phi$ as being constant. This raises our pseudo R^2 from 0.5089, when we used the full model for $\phi$, to 0.6067. We use "BC" (Bias Correction) which is the same as maximumm likelihood except it corrects for bias. To visualise the regression, we split the results into dyslexic children and normal children [@francisco2010].
+In this section, we do beta regression analysis on the ReadingSkills data set. First, we add a numeric equivalent for dyslexia, dcode, to our dataset. For "no", we code -0.0; for "yes" we code 1.0. We use the full model for $\mu$ (dcode, iq, and dcode:iq), but we model $\phi$ as being constant. This raises our pseudo R^2 from 0.5089, when we used the full model for $\phi$, to 0.6067. We use "BC" (Bias Correction) which is the same as maximumm likelihood except it corrects for bias. To visualise the regression, we split the results into dyslexic children and normal children [@francisco2010].
 
 In addition to the beta regression, we also do general linear regression using the logit link function. logit has the special property of transforming test scores falling on the interval (0, 1) to values falling on the set $\mathbb{R}$. When predicting, test scores with this model, we apply the inverse logit function to map from the $\mathbb{R}$ back to the interval (0, 1) [@R-base].
 
@@ -192,7 +253,7 @@ $$
 
 ```{r, warning=F, echo=T, message=F}
 
-ReadingSkillsModel <- ReadingSkills %>% mutate(dcode=ifelse(dyslexia == "no", -0.5, 0.5))
+ReadingSkillsModel <- ReadingSkills %>% mutate(dcode=ifelse(dyslexia == "no", 0.0, 1.0))
 
 model <- betareg(accuracy ~ dcode*iq, data=ReadingSkillsModel, type="BC")
 summary(model)
@@ -217,21 +278,82 @@ scale_color_manual(name="Regression Model", breaks=c("beta", "glm"), values=c("b
 
 
 ```
-## Beta Regression Coefficients
+## Results
 
 ```{r, warning=F, echo=T, message=F}
 
 model.summary <- summary(model)
+linmodel.summary <- summary(linmodel)
 
-coefs <- model.summary$coefficients$mean
+model.coefs <- model.summary$coefficients$mean
+linmodel.coefs <- linmodel.summary$coefficients
 
 ```
-| Variable | Beta | SE | p |
-| -------- | ---- | -- | - |
-| dyslexia | `r sprintf('%0.4g', coefs['dcode', 1])` | `r sprintf('%0.4g', coefs['dcode', 2])` | `r sprintf('%0.4g', coefs['dcode', 4])` |
-| IQ | `r sprintf('%0.4g', coefs['iq', 1])` | `r sprintf('%0.4g', coefs['iq', 2])` | `r sprintf('%0.4g', coefs['iq', 4])` |
-| dyslexia:IQ | `r sprintf('%0.4g', coefs['dcode:iq', 1])` | `r sprintf('%0.4g', coefs['dcode:iq', 2])` | `r sprintf('%0.4g', coefs['dcode:iq', 4])` |
 
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-pb0m{border-color:inherit;text-align:center;vertical-align:bottom}
+.tg .tg-kg9c{background-color:#D9D9D9;border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-za14{border-color:inherit;text-align:left;vertical-align:bottom}
+.tg .tg-jkyp{border-color:inherit;text-align:right;vertical-align:bottom}
+</style>
+<table class="tg"><thead>
+  <tr>
+    <th class="tg-kg9c" colspan="7" rowspan="2">Table 2: Association of Reading Skills Score with IQ and presence of Dyslexia</th>
+  </tr>
+  <tr>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="tg-c3ow" rowspan="2">Variable</td>
+    <td class="tg-pb0m" colspan="3">Beta Regression</td>
+    <td class="tg-pb0m" colspan="3">General Linear Regression</td>
+  </tr>
+  <tr>
+    <td class="tg-pb0m">β</td>
+    <td class="tg-pb0m">SE</td>
+    <td class="tg-pb0m">p</td>
+    <td class="tg-pb0m">β</td>
+    <td class="tg-pb0m">SE</td>
+    <td class="tg-pb0m">p</td>
+  </tr>
+  <tr>
+    <td class="tg-za14">Dyslexia</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', model.coefs['dcode', 1])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', model.coefs['dcode', 2])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', model.coefs['dcode', 4])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', linmodel.coefs['dcode', 1])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', linmodel.coefs['dcode', 2])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', linmodel.coefs['dcode', 4])`</td>
+  </tr>
+  <tr>
+    <td class="tg-za14">IQ (Z-score)</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', model.coefs['iq', 1])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', model.coefs['iq', 2])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', model.coefs['iq', 4])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', linmodel.coefs['iq', 1])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', linmodel.coefs['iq', 2])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', linmodel.coefs['iq', 4])`</td>
+  </tr>
+  <tr>
+    <td class="tg-za14">Dyslexia:iq</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', model.coefs['dcode:iq', 1])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', model.coefs['dcode:iq', 2])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', model.coefs['dcode:iq', 4])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', linmodel.coefs['dcode:iq', 1])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', linmodel.coefs['dcode:iq', 2])`</td>
+    <td class="tg-jkyp">`r sprintf('%0.4g', linmodel.coefs['dcode:iq', 4])`</td>
+  </tr>
+</tbody></table>
+<br>
+<br>
+
+Both the beta regression model and the general linear model with a logit link function show that whether or not a child has dyslexia significantly affects their reading skills score. In the beta regression model, the beta value of -1.92 means that for children with an average IQ, if they are dyslexic their odds of answering a reading question correctly decreases by a factor of $e^{1.92}$. IQ is a less significant with a p value of 0.09111 in the beta regression model and a p value of 0.104 in the general linear model with a logit link function. Dyslexia:iq has similar significance to IQ alone. Both models show that for normal children, the higher the IQ the better their reading score. In the beta regression model, the beta value of 0.3727 means that for normal children, if IQ increases by 1 standard deviation then they their odds of answering a reading question correctly increases by a factor of $e^{0.3727}$. Both models show that for dyslexic children, higher IQs may hurt reading scores. In the beta regression model, the beta for dyslexia:iq is -0.4299. This means that for dyslexic children, the effective beta for IQ is 0.3727 - 0.4299 = -0.0572. This means that for a dyslexic child, if their IQ increases by 1 standard deviation, there odds of answering a reading question correctly decreases by a factor of $e^{0.0572}$  
 
 ## Conclusion
 

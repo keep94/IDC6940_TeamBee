@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Travis Keep (Advisor: Dr. Seals)">
-<meta name="dcterms.date" content="2024-10-27">
+<meta name="dcterms.date" content="2024-11-02">
 
 <title>Methods Writeup</title>
 <style>
@@ -3262,7 +3262,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 27, 2024</p>
+      <p class="date">November 2, 2024</p>
     </div>
   </div>
   
@@ -3430,34 +3430,133 @@ ln(\phi_i) = -w_i\delta
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>score_normal_stats <span class="ot">&lt;-</span> normal <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="fu">min</span>(accuracy1), <span class="fu">median</span>(accuracy1), <span class="fu">max</span>(accuracy1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Table1: Student ReadingSkills data stratified by dyslexia</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 35%">
-<col style="width: 19%">
-<col style="width: 23%">
-<col style="width: 20%">
-</colgroup>
+<style type="text/css">
+.tg {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-kg9c{background-color:#D9D9D9;border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-0thz{border-color:inherit;font-weight:bold;text-align:left;vertical-align:bottom}
+.tg .tg-j6zm{font-weight:bold;text-align:left;vertical-align:bottom}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-za14{border-color:inherit;text-align:left;vertical-align:bottom}
+.tg .tg-7zrl{text-align:left;vertical-align:bottom}
+</style>
+<table class="tg">
 <thead>
-<tr class="header">
-<th>student characteristic</th>
-<th>Total(n=44)</th>
-<th>Dyslexia(n=19)</th>
-<th>Normal(n=25)</th>
+<tr>
+<th class="tg-kg9c" colspan="5" rowspan="2">
+Table 1: Student ReadingSkills data stratified by dyslexia
+</th>
+</tr>
+<tr>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>IQ (Z score)</td>
-<td>min -1.745<br>median -0.1225<br>max 1.856</td>
-<td>min -1.745<br>median -0.795<br>max 1.223</td>
-<td>min -0.914<br>median 0.59<br>max 1.856</td>
+<tr>
+<td class="tg-0thz" colspan="2">
+<span style="font-weight:bold">Student Characteristic</span>
+</td>
+<td class="tg-0thz">
+<span style="font-weight:bold">Total (n=44)</span>
+</td>
+<td class="tg-0thz">
+<span style="font-weight:bold">Dyslexia (n=19)</span>
+</td>
+<td class="tg-j6zm">
+<span style="font-weight:bold">Normal (n=25)</span>
+</td>
 </tr>
-<tr class="even">
-<td>Reading Score</td>
-<td>min 0.45932<br>median 0.70593<br>max 1</td>
-<td>min 0.45932<br>median 0.60916<br>max 0.70281</td>
-<td>min 0.64662<br>median 1<br>max 1</td>
+<tr>
+<td class="tg-0pky" rowspan="3">
+IQ (Z-Score)
+</td>
+<td class="tg-0pky">
+min
+</td>
+<td class="tg-za14">
+-1.745
+</td>
+<td class="tg-za14">
+-1.745
+</td>
+<td class="tg-za14">
+-0.914
+</td>
+</tr>
+<tr>
+<td class="tg-0pky">
+median
+</td>
+<td class="tg-za14">
+-0.1225
+</td>
+<td class="tg-za14">
+-0.795
+</td>
+<td class="tg-za14">
+0.59
+</td>
+</tr>
+<tr>
+<td class="tg-0pky">
+max
+</td>
+<td class="tg-za14">
+1.856
+</td>
+<td class="tg-za14">
+1.223
+</td>
+<td class="tg-za14">
+1.856
+</td>
+</tr>
+<tr>
+<td class="tg-0pky" rowspan="3">
+Reading Score
+</td>
+<td class="tg-0pky">
+min
+</td>
+<td class="tg-za14">
+0.45932
+</td>
+<td class="tg-za14">
+0.45932
+</td>
+<td class="tg-za14">
+0.64662
+</td>
+</tr>
+<tr>
+<td class="tg-0pky">
+median
+</td>
+<td class="tg-za14">
+0.70593
+</td>
+<td class="tg-za14">
+0.60916
+</td>
+<td class="tg-za14">
+1
+</td>
+</tr>
+<tr>
+<td class="tg-0pky">
+max
+</td>
+<td class="tg-za14">
+1
+</td>
+<td class="tg-za14">
+0.70281
+</td>
+<td class="tg-za14">
+1
+</td>
 </tr>
 </tbody>
 </table>
@@ -3479,7 +3578,7 @@ ln(\phi_i) = -w_i\delta
 </section>
 <section id="analysis" class="level2">
 <h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
-<p>In this section, we do beta regression analysis on the ReadingSkills data set. First, we add a numeric equivalent for dyslexia, dcode, to our dataset. For “no”, we code -0.5; for “yes” we code 0.5. We use the full model for <span class="math inline">\(\mu\)</span> (dcode, iq, and dcode:iq), but we model <span class="math inline">\(\phi\)</span> as being constant. This raises our pseudo R^2 from 0.5089, when we used the full model for <span class="math inline">\(\phi\)</span>, to 0.6067. We use “BC” (Bias Correction) which is the same as maximumm likelihood except it corrects for bias. To visualise the regression, we split the results into dyslexic children and normal children <span class="citation" data-cites="francisco2010"><a href="#ref-francisco2010" role="doc-biblioref">[6]</a></span>.</p>
+<p>In this section, we do beta regression analysis on the ReadingSkills data set. First, we add a numeric equivalent for dyslexia, dcode, to our dataset. For “no”, we code -0.0; for “yes” we code 1.0. We use the full model for <span class="math inline">\(\mu\)</span> (dcode, iq, and dcode:iq), but we model <span class="math inline">\(\phi\)</span> as being constant. This raises our pseudo R^2 from 0.5089, when we used the full model for <span class="math inline">\(\phi\)</span>, to 0.6067. We use “BC” (Bias Correction) which is the same as maximumm likelihood except it corrects for bias. To visualise the regression, we split the results into dyslexic children and normal children <span class="citation" data-cites="francisco2010"><a href="#ref-francisco2010" role="doc-biblioref">[6]</a></span>.</p>
 <p>In addition to the beta regression, we also do general linear regression using the logit link function. logit has the special property of transforming test scores falling on the interval (0, 1) to values falling on the set <span class="math inline">\(\mathbb{R}\)</span>. When predicting, test scores with this model, we apply the inverse logit function to map from the <span class="math inline">\(\mathbb{R}\)</span> back to the interval (0, 1) <span class="citation" data-cites="R-base"><a href="#ref-R-base" role="doc-biblioref">[7]</a></span>.</p>
 <p><span class="math display">\[
 \begin{align}
@@ -3490,7 +3589,7 @@ invlogit(p) &amp;= \frac{e^p}{e^p + 1}
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ReadingSkillsModel <span class="ot">&lt;-</span> ReadingSkills <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">dcode=</span><span class="fu">ifelse</span>(dyslexia <span class="sc">==</span> <span class="st">&quot;no&quot;</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ReadingSkillsModel <span class="ot">&lt;-</span> ReadingSkills <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">dcode=</span><span class="fu">ifelse</span>(dyslexia <span class="sc">==</span> <span class="st">&quot;no&quot;</span>, <span class="fl">0.0</span>, <span class="fl">1.0</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">betareg</span>(accuracy <span class="sc">~</span> dcode<span class="sc">*</span>iq, <span class="at">data=</span>ReadingSkillsModel, <span class="at">type=</span><span class="st">&quot;BC&quot;</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3506,10 +3605,10 @@ Quantile residuals:
 
 Coefficients (mean model with logit link):
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   1.3177     0.1438   9.160  &lt; 2e-16 ***
+(Intercept)   2.2778     0.2185  10.423  &lt; 2e-16 ***
 dcode        -1.9203     0.2822  -6.804 1.02e-11 ***
-iq            0.1578     0.1408   1.120    0.263    
-dcode:iq     -0.4299     0.2818  -1.525    0.127    
+iq            0.3727     0.2206   1.690   0.0911 .  
+dcode:iq     -0.4299     0.2818  -1.525   0.1272    
 
 Phi coefficients (precision model with identity link):
       Estimate Std. Error z value Pr(&gt;|z|)    
@@ -3520,7 +3619,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Type of estimator: BC (bias-corrected)
 Log-likelihood: 51.09 on 5 Df
 Pseudo R-squared: 0.6067
-Number of iterations: 20 (BFGS) + 2 (Fisher scoring) </code></pre>
+Number of iterations: 19 (BFGS) + 2 (Fisher scoring) </code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
@@ -3539,9 +3638,9 @@ Deviance Residuals:
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   1.1893     0.1224   9.716 4.40e-12 ***
+(Intercept)   1.9883     0.2121   9.374 1.20e-11 ***
 dcode        -1.5981     0.2448  -6.528 8.56e-08 ***
-iq            0.2119     0.1572   1.348    0.185    
+iq            0.4851     0.2916   1.664    0.104    
 dcode:iq     -0.5463     0.3145  -1.737    0.090 .  
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
@@ -3589,46 +3688,145 @@ Number of Fisher Scoring iterations: 7</code></pre>
 </div>
 </div>
 </section>
-<section id="beta-regression-coefficients" class="level2">
-<h2 class="anchored" data-anchor-id="beta-regression-coefficients">Beta Regression Coefficients</h2>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model.summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>coefs <span class="ot">&lt;-</span> model.summary<span class="sc">$</span>coefficients<span class="sc">$</span>mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>linmodel.summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(linmodel)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>model.coefs <span class="ot">&lt;-</span> model.summary<span class="sc">$</span>coefficients<span class="sc">$</span>mean</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>linmodel.coefs <span class="ot">&lt;-</span> linmodel.summary<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<table class="caption-top table">
+<style type="text/css">
+.tg {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-pb0m{border-color:inherit;text-align:center;vertical-align:bottom}
+.tg .tg-kg9c{background-color:#D9D9D9;border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-za14{border-color:inherit;text-align:left;vertical-align:bottom}
+.tg .tg-jkyp{border-color:inherit;text-align:right;vertical-align:bottom}
+</style>
+<table class="tg">
 <thead>
-<tr class="header">
-<th>Variable</th>
-<th>Beta</th>
-<th>SE</th>
-<th>p</th>
+<tr>
+<th class="tg-kg9c" colspan="7" rowspan="2">
+Table 2: Association of Reading Skills Score with IQ and presence of Dyslexia
+</th>
+</tr>
+<tr>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>dyslexia</td>
-<td>-1.92</td>
-<td>0.2822</td>
-<td>1.019e-11</td>
+<tr>
+<td class="tg-c3ow" rowspan="2">
+Variable
+</td>
+<td class="tg-pb0m" colspan="3">
+Beta Regression
+</td>
+<td class="tg-pb0m" colspan="3">
+General Linear Regression
+</td>
 </tr>
-<tr class="even">
-<td>IQ</td>
-<td>0.1578</td>
-<td>0.1408</td>
-<td>0.2625</td>
+<tr>
+<td class="tg-pb0m">
+β
+</td>
+<td class="tg-pb0m">
+SE
+</td>
+<td class="tg-pb0m">
+p
+</td>
+<td class="tg-pb0m">
+β
+</td>
+<td class="tg-pb0m">
+SE
+</td>
+<td class="tg-pb0m">
+p
+</td>
 </tr>
-<tr class="odd">
-<td>dyslexia:IQ</td>
-<td>-0.4299</td>
-<td>0.2818</td>
-<td>0.1272</td>
+<tr>
+<td class="tg-za14">
+Dyslexia
+</td>
+<td class="tg-jkyp">
+-1.92
+</td>
+<td class="tg-jkyp">
+0.2822
+</td>
+<td class="tg-jkyp">
+1.019e-11
+</td>
+<td class="tg-jkyp">
+-1.598
+</td>
+<td class="tg-jkyp">
+0.2448
+</td>
+<td class="tg-jkyp">
+8.565e-08
+</td>
+</tr>
+<tr>
+<td class="tg-za14">
+IQ (Z-score)
+</td>
+<td class="tg-jkyp">
+0.3727
+</td>
+<td class="tg-jkyp">
+0.2206
+</td>
+<td class="tg-jkyp">
+0.09111
+</td>
+<td class="tg-jkyp">
+0.4851
+</td>
+<td class="tg-jkyp">
+0.2916
+</td>
+<td class="tg-jkyp">
+0.104
+</td>
+</tr>
+<tr>
+<td class="tg-za14">
+Dyslexia:iq
+</td>
+<td class="tg-jkyp">
+-0.4299
+</td>
+<td class="tg-jkyp">
+0.2818
+</td>
+<td class="tg-jkyp">
+0.1272
+</td>
+<td class="tg-jkyp">
+-0.5463
+</td>
+<td class="tg-jkyp">
+0.3145
+</td>
+<td class="tg-jkyp">
+0.09001
+</td>
 </tr>
 </tbody>
 </table>
+<p><br> <br></p>
+<p>Both the beta regression model and the general linear model with a logit link function show that whether or not a child has dyslexia significantly affects their reading skills score. In the beta regression model, the beta value of -1.92 means that for children with an average IQ, if they are dyslexic their odds of answering a reading question correctly decreases by a factor of <span class="math inline">\(e^{1.92}\)</span>. IQ is a less significant with a p value of 0.09111 in the beta regression model and a p value of 0.104 in the general linear model with a logit link function. Dyslexia:iq has similar significance to IQ alone. Both models show that for normal children, the higher the IQ the better their reading score. In the beta regression model, the beta value of 0.3727 means that for normal children, if IQ increases by 1 standard deviation then they their odds of answering a reading question correctly increases by a factor of <span class="math inline">\(e^{0.3727}\)</span>. Both models show that for dyslexic children, higher IQs may hurt reading scores. In the beta regression model, the beta for dyslexia:iq is -0.4299. This means that for dyslexic children, the effective beta for IQ is 0.3727 - 0.4299 = -0.0572. This means that for a dyslexic child, if their IQ increases by 1 standard deviation, there odds of answering a reading question correctly decreases by a factor of <span class="math inline">\(e^{0.0572}\)</span></p>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
