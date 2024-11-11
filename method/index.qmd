@@ -258,11 +258,50 @@ ReadingSkillsModel <- ReadingSkills %>% mutate(dcode=ifelse(dyslexia == "no", 0.
 model <- betareg(accuracy ~ dcode*iq, data=ReadingSkillsModel, type="BC")
 summary(model)
 
-linmodel <- glm(accuracy ~ dcode*iq, family=gaussian(link="logit"), data=ReadingSkillsModel)
+```
+
+**Diagnostic** **Plots**
+
+```{r, warning=F, echo=T, message=F}
+par(mfrow = c(2, 2))
+plot(model, main = "Original Model Diagnostics")
+
+#Identify influential points
+cooks_dist <- cooks.distance(model)
+leverage <- hatvalues(model)
+residuals <- residuals(model, type = "pearson")
+
+# Set thresholds
+cooks_threshold <- 4 / nrow(ReadingSkillsModel)
+leverage_threshold <- 2 * (length(coef(model)) / nrow(ReadingSkillsModel))
+residual_threshold <- 3
+
+#Identify extreme points
+extreme_points <- which(cooks_dist > cooks_threshold |
+                        leverage > leverage_threshold |
+                        abs(residuals) > residual_threshold)
+```
+Number of extreme points found: `r length(extreme_points)`
+
+```{r, warning=F, echo=T, message=F}
+ReadingSkillsModel.cleaned <- ReadingSkillsModel[-extreme_points, ]
+
+model <- betareg(accuracy ~ dcode*iq, data=ReadingSkillsModel.cleaned, type="BC")
+summary(model)
+
+linmodel <- glm(accuracy ~ dcode*iq, family=gaussian(link="logit"), data=ReadingSkillsModel.cleaned)
 summary(linmodel)
 
-dyslexiaModel <- ReadingSkillsModel %>% filter(dyslexia == "yes")
-normalModel <- ReadingSkillsModel %>% filter(dyslexia == "no")
+```
+**Cleaned Diagnostic Plots**
+
+```{r, warning=F, echo=T, message=F}
+par(mfrow = c(2, 2))
+plot(model, main = "Cleaned Model Diagnostics")
+
+
+dyslexiaModel <- ReadingSkillsModel.cleaned %>% filter(dyslexia == "yes")
+normalModel <- ReadingSkillsModel.cleaned %>% filter(dyslexia == "no")
 
 ggplot() + geom_point(aes(x=normalModel$iq, y=normalModel$accuracy), color="red") +
 geom_line(aes(x=normalModel$iq, y=predict(model, newdata=normalModel), color="beta")) +
@@ -353,7 +392,7 @@ linmodel.coefs <- linmodel.summary$coefficients
 <br>
 <br>
 
-Both the beta regression model and the general linear model with a logit link function show that whether or not a child has dyslexia significantly affects their reading skills score. In the beta regression model, the beta value of -1.92 means that for children with an average IQ, if they are dyslexic their odds of answering a reading question correctly decreases by a factor of $e^{1.92}$. IQ is a less significant with a p value of 0.09111 in the beta regression model and a p value of 0.104 in the general linear model with a logit link function. Dyslexia:iq has similar significance to IQ alone. Both models show that for normal children, the higher the IQ the better their reading score. In the beta regression model, the beta value of 0.3727 means that for normal children, if IQ increases by 1 standard deviation then they their odds of answering a reading question correctly increases by a factor of $e^{0.3727}$. Both models show that for dyslexic children, higher IQs may hurt reading scores. In the beta regression model, the beta for dyslexia:iq is -0.4299. This means that for dyslexic children, the effective beta for IQ is 0.3727 - 0.4299 = -0.0572. This means that for a dyslexic child, if their IQ increases by 1 standard deviation, there odds of answering a reading question correctly decreases by a factor of $e^{0.0572}$  
+Both the beta regression model and the general linear model with a logit link function show that whether or not a child has dyslexia significantly affects their reading skills score. In the beta regression model, the beta value of -2.277 means that for children with an average IQ, if they are dyslexic their odds of answering a reading question correctly decreases by a factor of $e^{2.277}$. IQ is a less significant with a p value of 0.1597 in the beta regression model and a p value of 0.1545 in the general linear model with a logit link function. Dyslexia:iq has similar significance to IQ alone. Both models show that for normal children, the higher the IQ the better their reading score. In the beta regression model, the beta value of 0.3205 means that for normal children, if IQ increases by 1 standard deviation then they their odds of answering a reading question correctly increases by a factor of $e^{0.3205}$. Both models show that for dyslexic children, higher IQs may hurt reading scores. In the beta regression model, the beta for dyslexia:iq is -0.3737. This means that for dyslexic children, the effective beta for IQ is 0.3205 - 0.3737 = -0.0532. This means that for a dyslexic child, if their IQ increases by 1 standard deviation, there odds of answering a reading question correctly decreases by a factor of $e^{0.0532}$  
 
 ## Conclusion
 
