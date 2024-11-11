@@ -276,6 +276,7 @@ cooks_threshold <- 4 / nrow(ReadingSkillsModel)
 leverage_threshold <- 2 * (length(coef(model)) / nrow(ReadingSkillsModel))
 residual_threshold <- 3
 
+
 #Identify extreme points
 extreme_points <- which(cooks_dist > cooks_threshold |
                         leverage > leverage_threshold |
@@ -317,6 +318,9 @@ scale_color_manual(name="Regression Model", breaks=c("beta", "glm"), values=c("b
 
 
 ```
+We cleaned the dataset of possible outliers before fitting our final model. We considered a point an outlier if it has a cooks distance of more than 4 / N (in our case 4 / 44) or a leverage of more than 2*(the number of coefficients in the model) / N or a residual of more than 3 standard deviations. We found 4 such points.
+
+
 ## Results
 
 ```{r, warning=F, echo=T, message=F}
