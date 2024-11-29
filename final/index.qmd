@@ -56,7 +56,7 @@ if $F > F_\alpha(p, n-p-1)$ then the model is significant. [@kutner2004].
 
 ## Why General Linear Regression is not Always Suitable
 
-General linear regression assumes that the error terms $\epsilon = y_i - \hat{y_i}$ follow a normal distribution with constant variance across all the i's. When the dependent variable has a definite minumum and maximum such as a ratio or percentage, this assumption that general linear regression makes does not hold. The variance of the error terms is not constant, but becomes less when the dependent variable gets close to its minimum or maximum. Sometimes we must assume that the dependent variable follows a beta distribution instead of a normal distribution.
+General linear regression assumes that each $y_i$ follows a normal distribution with mean $\hat{y_i}$ and constant variance. When the dependent variable has a definite minumum and maximum such as a ratio or percentage, this assumption that general linear regression makes does not hold. The variance of the $y_i$'s is not constant, but becomes less when $\hat{y_i}$ is close to the minimum or maximum. Sometimes we must assume that each $y_i$ follows a beta distribution instead of a normal distribution.
 
 ## Beta Distribution
 
@@ -237,7 +237,7 @@ score_normal_stats <- normal %>% summarize(min(accuracy1), median(accuracy1), ma
 ```{r, warning=F, echo=T, message=F}
 library(ggplot2)
 coords <- aes(x=iq, y=accuracy1)
-ggplot(ReadingSkills, coords) + geom_point(aes(color=dyslexia)) + labs(x="IQ (Z-score)", y="score")
+ggplot(ReadingSkills, coords) + geom_point(aes(color=dyslexia)) + labs(x="IQ (Z-score)", y="score") + ggtitle("Score by IQ for all students")
 ```
 
 ## Analysis
@@ -356,7 +356,7 @@ In the beta regression model, dyslexia, IQ, and the interaction term are all sig
 
 ## Conclusion
 
-In conclusion, because beta regression assumes dependent variables have a beta distribution instead of a normal distribution, beta regression provides superior models to normal regression when the dependent variable is a percentage or has a definite minimum and maximum value.
+In conclusion, because beta regression assumes dependent variables have a beta distribution instead of a normal distribution, beta regression can provide superior models to normal regression when the dependent variable is a percentage or has a definite minimum and maximum value. For the reading skills dataset, using beta regression shows that whether or not a child has dyslexia, the child's IQ, and the interaction between the two are all significant factors in predicting the reading test score. On the other hand, using regular linear regression with the logit link function only shows the presence of dyslexia as being significant. Beta regression shows that dyslexic children generally score lower on the reading test than normal children. For normal children, a higher IQ generally means a higher test score, but for dyslexic children, a higher IQ means a slightly lower test score. 
 
 
 ```{r, warning=FALSE, echo=T, message=FALSE}
