@@ -24,7 +24,7 @@ While normal linear regression has many useful applications, it does not accurat
 
 ## General Linear Regression
 
-First we discuss general linear regression. In general linear regression, the dependent variable is modeled as a linear combination of the regressors in the model plus some constant. For example $\hat{y}=\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \cdots$. The $\beta_i$'s are chosen to minimise the the Sum of Squares error which is
+First we discuss general linear regression. In general linear regression, the dependent variable is modeled as a linear combination of the regressors in the model plus some constant. For example $\hat{y}=\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + \cdots$. The $\beta_i$'s are chosen to minimize the Sum of Squares error which is
 
 $$
 SSE = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
@@ -121,7 +121,7 @@ $$
 ln(\phi_i) = -w_i\delta
 $$
 
-[@smithson2006]. Note that $w_i$ is often some subset of $x_i$. The minus sign is in the second equation so that larger coefficients in $\delta$ mean a larger variance. [@smithson2006]. We find the coefficients of $\beta$ and $\delta$ by maximizing the log likelihood function which is in terms of $\beta$ and $\delta$.  R supports three methods for finding the $\beta_i$ and $\delta_i$, ML which is just standard maximum likelihood. BC, which is maximum likelihood with bias correction, and BR which is maximum likelihood with bias reduction [@grun2012].
+[@smithson2006]. Note that $w_i$ is often some subset of $x_i$. The minus sign is in the second equation so that larger coefficients in $\delta$ mean a larger variance. [@smithson2006]. We find the coefficients of $\beta$ and $\delta$ by maximizing the log likelihood function which is in terms of $\beta$ and $\delta$.  R supports three methods for finding the $\beta_i$ and $\delta_i$: ML which is just standard maximum likelihood; BC, which is maximum likelihood with bias correction; and BR which is maximum likelihood with bias reduction [@grun2012].
 
 Note that $\phi$ can be modeled as being constant throughout or it can be modeled as being dependent on certain regressors [@smithson2006].
 
@@ -131,13 +131,13 @@ $$
 \mu = \frac{e^{x \beta}}{e^{x \beta} + 1}
 $$
 
-Like in linear regression, the $\beta_i$ have a definite interpretation. If $x_i$ increases by 1 with all other regressors remaining the same, the odds of $\mu$ multiply by $e^{b_i}$. Where the odds of $\mu$ are $\frac{\mu}{1-\mu}$ [@ferrari2004].
+Like in linear regression, the $\beta_i$ have a definite interpretation. If $x_i$ increases by 1 with all other regressors remaining the same, the odds of $\mu$ increase by a factor of $e^{b_i}$, where the odds of $\mu$ are $\frac{\mu}{1-\mu}$ [@ferrari2004].
 
 ## The Reading Skills Dataset
 
-This is the ReadingSkills dataset included with the R betareg package. This dataset explores reading skills for 44 school aged children. It is significant because it shows that beta regression shows that IQ alone is significant in predicting reading scores while regular regression techniques show that IQ alone is not significant in predicting reading scores.
+This is the ReadingSkills dataset included with the R betareg package. This dataset explores reading skills for 44 school aged children. In this data set, beta regression shows that IQ alone is significant in predicting reading scores while regular regression techniques show that IQ alone is not significant in predicting reading scores.
 
-Here are the description of the columns
+Here are the descriptions of the columns:
 
 | Name | Type | Description |
 |------|------|-------------|
@@ -242,7 +242,7 @@ ggplot(ReadingSkills, coords) + geom_point(aes(color=dyslexia)) + labs(x="IQ (Z-
 
 ## Analysis
 
-In this section, we do beta regression analysis on the ReadingSkills data set. First, we add a numeric equivalent for dyslexia, dcode, to our dataset. For “no”, we code 0.0; for “yes” we code 1.0. We use the full model for $\mu$ (dcode, iq, and dcode:iq), but we model $\phi$ with just dcode and iq and no interaction term. Modeling phi in this way makes IQ and the interaction term significant. We use "BC" (Bias Correction) which is the same as maximum likelihood except that it corrects for bias. To visualise the regression, we split the results into dyslexic children and normal children [@francisco2010].
+In this section, we do beta regression analysis on the ReadingSkills data set. First, we add a numeric equivalent for dyslexia to our dataset and store it in a new column named dcode. For “no”, we code 0.0; for “yes” we code 1.0. We use the full model for $\mu$ (dcode, iq, and dcode:iq), but we model $\phi$ with just dcode and iq and no interaction term. Modeling phi in this way makes IQ and the interaction term significant. We use "BC" (Bias Correction) which is the same as maximum likelihood except that it corrects for bias. To visualise the regression, we split the results into dyslexic children and normal children [@francisco2010].
 
 In addition to the beta regression, we also do general linear regression using the logit link function. logit has the special property of transforming test scores falling on the interval (0, 1) to values falling on the set $\mathbb{R}$. When predicting, test scores with this model, we apply the inverse logit function to map from the $\mathbb{R}$ back to the interval (0, 1) [@R-base].
 
@@ -352,12 +352,11 @@ linmodel.coefs <- linmodel.summary$coefficients
 <br>
 <br>
 
-In the beta regression model, dyslexia, IQ, and the interaction term are all significant. However, in the linear regression model, only dyslexia is significant. Both models show that the presence of dyslexia hurts reading scores. In the beta regression model, the beta value of -1.446 means that for children with an average IQ, if they are dyslexic their odds of answering a reading question correctly decreases by a factor of $e^{1.446}$. The beta value of 1.049 for IQ means that if a child's IQ increases by one standard deviation, then their odds of answering a reading question correctly increases by a factor of $e^{1.049}$. The interaction beta of 1.144 means that when dyslexia is present, if a child's IQ increases by one standard deviation, their odds of answering a reading question correctly decreases by a factor of $e^{0.095}$. This is because 1.049 - 1.144 = -0.095. The general linear regression model also shows that for normal children a higher IQ means a higher reading score. Like the beta regression model, the general linear regression model shows that when dyslexia is present that a higher IQ may mean slightly lower reading scores. The difference however is that for beta regression, all the betas are significant.
+Dyslexia, IQ, and the interaction term are all significant in the beta regression model. However, in the linear regression model, only dyslexia is significant. Both models show that the presence of dyslexia hurts reading scores. In the beta regression model, the beta value of -1.446 means that for children with an average IQ, if they are dyslexic their odds of answering a reading question correctly decreases by a factor of $e^{1.446}$. The beta value of 1.049 for IQ means that if a child's IQ increases by one standard deviation, then their odds of answering a reading question correctly increases by a factor of $e^{1.049}$. The interaction beta of 1.144 means that when dyslexia is present, if a child's IQ increases by one standard deviation, their odds of answering a reading question correctly decreases by a factor of $e^{0.095}$. This is because 1.049 - 1.144 = -0.095. The general linear regression model also shows that for normal children a higher IQ means a higher reading score. Like the beta regression model, the general linear regression model shows that when dyslexia is present, a higher IQ may mean slightly lower reading scores. The difference however is that for beta regression, all the betas are significant.
 
 ## Conclusion
 
-In conclusion, because beta regression assumes dependent variables have a beta distribution instead of a normal distribution, beta regression can provide superior models to normal regression when the dependent variable is a percentage or has a definite minimum and maximum value. For the reading skills dataset, using beta regression shows that whether or not a child has dyslexia, the child's IQ, and the interaction between the two are all significant factors in predicting the reading test score. On the other hand, using regular linear regression with the logit link function only shows the presence of dyslexia as being significant. Beta regression shows that dyslexic children generally score lower on the reading test than normal children. For normal children, a higher IQ generally means a higher test score, but for dyslexic children, a higher IQ means a slightly lower test score. 
-
+In conclusion, because beta regression assumes dependent variables have a beta distribution instead of a normal distribution, beta regression can provide superior models to normal regression when the dependent variable is a percentage or has a definite minimum and maximum value. For the reading skills dataset, using beta regression shows that whether or not a child has dyslexia, the child's IQ, and the interaction between the two are all significant factors in predicting the reading test score. On the other hand, using regular linear regression with the logit link function only shows the presence of dyslexia as being significant. Beta regression shows that when IQ is average, dyslexic children generally score lower on the reading test than normal children. For normal children, a higher IQ generally means a higher test score, but for dyslexic children a higher IQ actually means a slightly lower reading test score.
 
 ```{r, warning=FALSE, echo=T, message=FALSE}
 # loading packages 
