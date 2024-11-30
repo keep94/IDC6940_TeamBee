@@ -146,9 +146,9 @@ Here are the descriptions of the columns:
 | iq | numeric | Non verbal intelligence quotient transform to z score |
 | accuracy1 | numeric | same as accuracy but score goes up to 1.0 |
 
+<br>
 
-
-```{r, warning=FALSE, echo=T, message=FALSE}
+```{r, warning=FALSE, echo=F, message=FALSE}
 library(betareg)
 library(dplyr)
 library(magrittr)
@@ -233,8 +233,9 @@ score_normal_stats <- normal %>% summarize(min(accuracy1), median(accuracy1), ma
   </tr>
 </tbody></table>
 
+<br>
 
-```{r, warning=F, echo=T, message=F}
+```{r, warning=F, echo=F, message=F}
 library(ggplot2)
 coords <- aes(x=iq, y=accuracy1)
 ggplot(ReadingSkills, coords) + geom_point(aes(color=dyslexia)) + labs(x="IQ (Z-score)", y="score") + ggtitle("Score by IQ for all students")
@@ -252,8 +253,9 @@ logit(p) &= log \left( \frac{p}{1-p} \right) \\
 invlogit(p) &= \frac{e^p}{e^p + 1}
 \end{align}
 $$
+<br>
 
-```{r, warning=F, echo=T, message=F}
+```{r, warning=F, echo=F, message=F}
 
 ReadingSkillsModel <- ReadingSkills %>% mutate(dcode=ifelse(dyslexia == "no", 0.0, 1.0))
 
@@ -279,7 +281,9 @@ scale_color_manual(name="Regression Model", breaks=c("beta", "glm"), values=c("b
 
 ## Results
 
-```{r, warning=F, echo=T, message=F}
+<br>
+
+```{r, warning=F, echo=F, message=F}
 
 model.summary <- summary(model)
 linmodel.summary <- summary(linmodel)
@@ -358,7 +362,9 @@ Dyslexia, IQ, and the interaction term are all significant in the beta regressio
 
 In conclusion, because beta regression assumes dependent variables have a beta distribution instead of a normal distribution, beta regression can provide superior models to normal regression when the dependent variable is a percentage or has a definite minimum and maximum value. For the reading skills dataset, using beta regression shows that whether or not a child has dyslexia, the child's IQ, and the interaction between the two are all significant factors in predicting the reading test score. On the other hand, using regular linear regression with the logit link function only shows the presence of dyslexia as being significant. Beta regression shows that when IQ is average, dyslexic children generally score lower on the reading test than normal children. For normal children, a higher IQ generally means a higher reading test score, but for dyslexic children a higher IQ actually means a slightly lower reading test score.
 
-```{r, warning=FALSE, echo=T, message=FALSE}
+<br>
+
+```{r, warning=FALSE, echo=F, message=FALSE}
 # loading packages 
 library(tidyverse)
 library(knitr)
